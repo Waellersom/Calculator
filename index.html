@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <div id="frame">
+        <div id="top-screen">
+            <input type="text" disabled id="screen">
+            <div id="subscreen">
+                <input type="text" disabled id="sub-screen" class="scr-style">
+            </div>
+        </div>
+        <div class="btn">
+            <div>
+                <button class="btn-1 btn-3">&#8730</button>
+                <button class="btn-1 btn-3">X<sup>2</sup></button>
+                <button class="btn-1 btn-3" id="btn-clear">Clear</button>
+                <button class="btn-1 btn-3">&#247</button>
+            </div>
+            <div>
+                <button class="btn-1" id="btn-7">7</button>
+                <button class="btn-1" id="btn-8">8</button>
+                <button class="btn-1" id="btn-9">9</button>
+                <button class="btn-1 btn-3" id="btn-multiply">&#215</button>
+            </div>
+            <div>
+                <button class="btn-1" id="btn-4">4</button>
+                <button class="btn-1" id="btn-5">5</button>
+                <button class="btn-1" id="btn-6">6</button>
+                <button class="btn-1 btn-3">-</button>
+            </div>
+            <div>
+                <button class="btn-1" id="btn-1">1</button>
+                <button class="btn-1" id="btn-2">2</button>
+                <button class="btn-1" id="btn-3">3</button>
+                <button class="btn-1 btn-2" id="btn-sum">+</button>
+            </div>
+            <div>
+                <button class="btn-1">+ / -</button>
+                <button class="btn-1" id="btn-0">0</button>
+                <button class="btn-1">,</button>
+                <button class="btn-1 btn-3" id="btn-result">=</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
