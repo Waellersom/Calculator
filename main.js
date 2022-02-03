@@ -1,6 +1,31 @@
+function getScreen() {
+    return $('#screen').val()
+}
 function setScreen(a) {
     $('#screen').attr('value', a)
     return
+}
+function setSubScreen(a, b, c) {
+    $('#sub-screen').attr('value', b + ' ' + a + ' ' + c)
+    setScreen('0')
+    return a
+}
+function clear() {
+    $('#screen').attr('value', '0')
+    $('#sub-screen').attr('value', '')
+    return
+}
+function sum(a, b) {
+    return parseFloat(a) + parseFloat(b)
+}
+function subtract(a, b) {
+    return parseFloat(a) - parseFloat(b)
+}
+function multiply(a, b) {
+    return parseFloat(a) * parseFloat(b)
+}
+function divide(a, b) {
+    return parseFloat(a) / parseFloat(b)
 }
 function insert(a, b) {
     if (getScreen().length < 10) {
@@ -12,19 +37,6 @@ function insert(a, b) {
     } else {
         return b
     }
-}
-function setSubScreen(a, b, c) {
-    $('#sub-screen').attr('value', b + ' ' + a + ' ' + c)
-    setScreen('0')
-    return a
-}
-function getScreen() {
-    return $('#screen').val()
-}
-function clear() {
-    setSubScreen('', '', '')
-    setScreen('0')
-    return
 }
 function result(a, b, c) {
     switch (a) {
