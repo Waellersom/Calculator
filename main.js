@@ -2,22 +2,32 @@ function getScreen() {
     return $('#screen').val()
 }
 function setScreen(a) {
+    if (jQuery.isFunction(result())) {
+        clear()
+    }
     if (getScreen().length < 10) {
         if (a == '0' && getScreen() == '0' || getScreen() == '0') {
             $('#screen').attr('value', a)
             return
         } else {
             $('#screen').attr('value', getScreen() + a)
-            return
         }
         return
     }
     return
 }
-function setSubScreen(a, b, c) {
-    $('#sub-screen').attr('value', b + ' ' + a + ' ' + c)
-    setScreen('0')
-    return a
+function getSubScreen() {
+    return $('#sub-screen').val()
+}
+function setSubScreen(a) {
+    if (getSubScreen() == '') {
+        $('#sub-screen').attr('value', `${getScreen()} ${a}`)
+        $('#screen').attr('value', '0')
+        return a
+    } else {
+        $('#sub-screen').attr('value', `${getSubScreen()} ${a}`)
+    }
+    return
 }
 function clear() {
     $('#screen').attr('value', '0')
@@ -37,22 +47,24 @@ function divide(a, b) {
     return parseFloat(a) / parseFloat(b)
 }
 function result(a, b, c) {
-    switch (a) {
+    switch (b) {
         case '+':
-            setSubScreen(a, b, c)
-            setScreen(parseFloat(b) + parseFloat(c))
+            setSubScreen(getScreen())
+            $('#screen').attr('value', '')
+            $('#screen').attr('value', sum(a, c))
             break
         case '*':
-            setSubScreen(a, b, c)
-            setScreen(parseFloat(b) * parseFloat(c))
+            setSubScreen(getScreen())
+            $('#screen').attr('value', '')
+            $('#screen').attr('value', multiply(a, c))
             break
     }
     return
 }
 
 $(document).ready(function () {
-    var varOpe
-    var varScr
+    var num
+    var ope
     setScreen('0')
     $('#btn-0').click(function () {
         setScreen('0')
@@ -88,12 +100,14 @@ $(document).ready(function () {
             clear()
         }),
         $('#btn-sum').click(function () {
-            varOpe = setSubScreen('+', varScr = getScreen(), '')
+            num = getScreen()
+            ope = setSubScreen('+')
         }),
         $('#btn-multiply').click(function () {
-            varOpe = setSubScreen('*', varScr = getScreen(), '')
+            num = getScreen()
+            ope = setSubScreen('*')
         }),
         $('#btn-result').click(function () {
-            result(varOpe, varScr, getScreen())
+            result(num, ope, getScreen())
         })
 })
