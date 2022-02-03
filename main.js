@@ -1,4 +1,4 @@
-function observer(a) {
+function setScreen(a) {
     $('#screen').attr('value', a)
     return
 }
@@ -15,7 +15,7 @@ function insert(a, b) {
 }
 function setSubScreen(a, b, c) {
     $('#sub-screen').attr('value', b + ' ' + a + ' ' + c)
-    observer('0')
+    setScreen('0')
     return a
 }
 function getScreen() {
@@ -23,18 +23,18 @@ function getScreen() {
 }
 function clear() {
     setSubScreen('', '', '')
-    observer('0')
+    setScreen('0')
     return
 }
 function result(a, b, c) {
     switch (a) {
         case '+':
             setSubScreen(a, b, c)
-            observer(parseFloat(b) + parseFloat(c))
+            setScreen(parseFloat(b) + parseFloat(c))
             break
         case '*':
             setSubScreen(a, b, c)
-            observer(parseFloat(b) * parseFloat(c))
+            setScreen(parseFloat(b) * parseFloat(c))
             break
     }
     return
@@ -43,36 +43,36 @@ function result(a, b, c) {
 $(document).ready(function () {
     var varOpe
     var varScr
-    observer('0')
+    setScreen('0')
     $('#btn-0').click(function () {
-        observer(insert('0', getScreen()))
+        setScreen(insert('0', getScreen()))
     }),
         $('#btn-1').click(function () {
-            observer(insert('1', getScreen()))
+            setScreen(insert('1', getScreen()))
         }),
         $('#btn-2').click(function () {
-            observer(insert('2', getScreen()))
+            setScreen(insert('2', getScreen()))
         }),
         $('#btn-3').click(function () {
-            observer(insert('3', getScreen()))
+            setScreen(insert('3', getScreen()))
         }),
         $('#btn-4').click(function () {
-            observer(insert('4', getScreen()))
+            setScreen(insert('4', getScreen()))
         }),
         $('#btn-5').click(function () {
-            observer(insert('5', getScreen()))
+            setScreen(insert('5', getScreen()))
         }),
         $('#btn-6').click(function () {
-            observer(insert('6', getScreen()))
+            setScreen(insert('6', getScreen()))
         }),
         $('#btn-7').click(function () {
-            observer(insert('7', getScreen()))
+            setScreen(insert('7', getScreen()))
         }),
         $('#btn-8').click(function () {
-            observer(insert('8', getScreen()))
+            setScreen(insert('8', getScreen()))
         }),
         $('#btn-9').click(function () {
-            observer(insert('9', getScreen()))
+            setScreen(insert('9', getScreen()))
         }),
         $('#btn-clear').click(function () {
             clear()
