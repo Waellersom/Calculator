@@ -2,9 +2,6 @@ function getScreen() {
     return $('#screen').val()
 }
 function setScreen(a) {
-    if (jQuery.isFunction(result())) {
-        clear()
-    }
     if (getScreen().length < 10) {
         if (a == '0' && getScreen() == '0' || getScreen() == '0') {
             $('#screen').attr('value', a)
@@ -29,6 +26,12 @@ function setSubScreen(a) {
     }
     return
 }
+function newOperatio(a) {
+    if (a) {
+        clear()
+    }
+    return false
+}
 function clear() {
     $('#screen').attr('value', '0')
     $('#sub-screen').attr('value', '')
@@ -52,12 +55,12 @@ function result(a, b, c) {
             setSubScreen(getScreen())
             $('#screen').attr('value', '')
             $('#screen').attr('value', sum(a, c))
-            break
+            return true
         case '*':
             setSubScreen(getScreen())
             $('#screen').attr('value', '')
             $('#screen').attr('value', multiply(a, c))
-            break
+            return true
     }
     return
 }
@@ -65,35 +68,46 @@ function result(a, b, c) {
 $(document).ready(function () {
     var num
     var ope
+    var con
     setScreen('0')
     $('#btn-0').click(function () {
+        con = newOperatio(con)
         setScreen('0')
     }),
         $('#btn-1').click(function () {
+            con = newOperatio(con)
             setScreen('1')
         }),
         $('#btn-2').click(function () {
+            con = newOperatio(con)
             setScreen('2')
         }),
         $('#btn-3').click(function () {
+            con = newOperatio(con)
             setScreen('3')
         }),
         $('#btn-4').click(function () {
+            con = newOperatio(con)
             setScreen('4')
         }),
         $('#btn-5').click(function () {
+            con = newOperatio(con)
             setScreen('5')
         }),
         $('#btn-6').click(function () {
+            con = newOperatio(con)
             setScreen('6')
         }),
         $('#btn-7').click(function () {
+            con = newOperatio(con)
             setScreen('7')
         }),
         $('#btn-8').click(function () {
+            con = newOperatio(con)
             setScreen('8')
         }),
         $('#btn-9').click(function () {
+            con = newOperatio(con)
             setScreen('9')
         }),
         $('#btn-clear').click(function () {
@@ -108,6 +122,6 @@ $(document).ready(function () {
             ope = setSubScreen('*')
         }),
         $('#btn-result').click(function () {
-            result(num, ope, getScreen())
+            con = result(num, ope, getScreen())
         })
 })
