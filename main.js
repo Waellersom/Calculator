@@ -3,7 +3,7 @@ function getScreen() {
 }
 function setScreen(a) {
     if (getScreen().length < 10) {
-        if (a == '0' && getScreen() == '0' || getScreen() == '0') {
+        if (getScreen() == '0') {
             $('#screen').attr('value', a)
             return
         } else {
