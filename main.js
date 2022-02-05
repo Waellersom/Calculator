@@ -40,9 +40,6 @@ function clear(a) {
             return undefined
     }
     return
-    $('#screen').attr('value', '0')
-    $('#sub-screen').attr('value', '')
-    return
 }
 function sum(a, b) {
     return parseFloat(a) + parseFloat(b)
