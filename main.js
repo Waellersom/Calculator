@@ -1,20 +1,21 @@
 function getScreen() {
     return $('#screen').val()
 }
-function setScreen(a, b) {
-    if (b) {
-        clear('soft')
-    }
+function setScreen(a) {
     if (getScreen().length < 10) {
         if (getScreen() == '0') {
             $('#screen').attr('value', a)
-            return false
+            return
         } else {
             $('#screen').attr('value', getScreen() + a)
         }
-        return false
+        return
     }
-    return false
+    return
+}
+function clearScreen() {
+    $('#screen').attr('value', '0')
+    return
 }
 function getSubScreen() {
     return $('#sub-screen').val()
@@ -29,16 +30,13 @@ function setSubScreen(a) {
     }
     return
 }
-function clear(a) {
-    switch (a) {
-        case 'soft':
-            $('#screen').attr('value', '')
-            break
-        case 'hard':
-            $('#screen').attr('value', '0')
-            $('#sub-screen').attr('value', '')
-            return undefined
-    }
+function clearSubScreen() {
+    $('#sub-screen').attr('value', '')
+    return
+}
+function clear() {
+    $('#screen').attr('value', '0')
+    $('#sub-screen').attr('value', '')
     return
 }
 function sum(a, b) {
@@ -54,31 +52,22 @@ function divide(a, b) {
     return parseFloat(a) / parseFloat(b)
 }
 function negative() {
-    setScreen(parseFloat(getScreen()) * -1, true)
+    $('#screen').attr('value', parseFloat(getScreen()) * -1)
     return
 }
-function result(a, b, c) {
+function result(a, b) {
     switch (b) {
         case '+':
-            setSubScreen(getScreen())
-            $('#screen').attr('value', '')
-            $('#screen').attr('value', sum(a, c))
-            return true
+            return sum(a, getScreen())
         case '-':
-            setSubScreen(getScreen())
-            $('#screen').attr('value', '')
-            $('#screen').attr('value', subtract(a, c))
-            return true
+            return subtract(a, getScreen())
         case '*':
-            setSubScreen(getScreen())
-            $('#screen').attr('value', '')
-            $('#screen').attr('value', multiply(a, c))
-            return true
+            return multiply(a, getScreen())
         case '/':
-            setSubScreen(getScreen())
-            $('#screen').attr('value', '')
-            $('#screen').attr('value', divide(a, c))
-            return true
+            return divide(a, getScreen())
+        default:
+            alert('Ops! Ocorreu um erro de sintaxe! ¯\\_(ツ)_/¯')
+            break
     }
     return
 }
@@ -86,61 +75,102 @@ function result(a, b, c) {
 $(document).ready(function () {
     var varNumber
     var varOperation
-    var callResult
-    setScreen('0', false)
+    var varOperationCall
+    var varResult
+    var varResultCall
+
+    setScreen('0')
     $('#btn-0').click(function () {
-        callResult = setScreen('0', callResult)
+        setScreen('0')
     }),
         $('#btn-1').click(function () {
-            callResult = setScreen('1', callResult)
+            if (varResultCall) {
+                clearScreen()
+                setScreen('1')
+                varCallResult = false
+            } else {
+                setScreen('1')
+            }
         }),
         $('#btn-2').click(function () {
-            callResult = setScreen('2', callResult)
+            setScreen('2')
         }),
         $('#btn-3').click(function () {
-            callResult = setScreen('3', callResult)
+            setScreen('3')
         }),
         $('#btn-4').click(function () {
-            callResult = setScreen('4', callResult)
+            setScreen('4')
         }),
         $('#btn-5').click(function () {
-            callResult = setScreen('5', callResult)
+            setScreen('5')
         }),
         $('#btn-6').click(function () {
-            callResult = setScreen('6', callResult)
+            setScreen('6')
         }),
         $('#btn-7').click(function () {
-            callResult = setScreen('7', callResult)
+            setScreen('7')
         }),
         $('#btn-8').click(function () {
-            callResult = setScreen('8', callResult)
+            setScreen('8')
         }),
         $('#btn-9').click(function () {
-            callResult = setScreen('9', callResult)
+            setScreen('9')
         }),
         $('#btn-negative').click(function () {
             negative()
         }),
         $('#btn-clear').click(function () {
-            [varNumber, varOperation, callResult] = Array().fill(clear('hard'))
+            clearScreen()
+            clearSubScreen()
+            varNumber = null
+            varOperation = null
+            varOperationCall = null
+            varResult = null
+            varResultCall = null
+
         }),
         $('#btn-sum').click(function () {
-            varNumber = getScreen()
-            varOperation = setSubScreen('+')
+            if (varOperationCall && !varResultCall) {
+                varOperation = '+'
+                varNumber = result(varNumber, varOperation)
+                $('#sub-screen').attr('value', `${varNumber} ${varOperation}`)
+                clearScreen()
+            } else if (varResultCall) {
+                varOperation = '+'
+                varNumber = varResult
+                $('#sub-screen').attr('value', `${varNumber} ${varOperation}`)
+                clearScreen()
+                varResultCall = false
+            } else {
+                varNumber = getScreen()
+                varOperation = setSubScreen('+')
+                varOperationCall = true
+            }
         }),
         $('#btn-subtract').click(function () {
             varNumber = getScreen()
-            varOperation = setSubScreen('-')
+            varOperation = '-'
+            setSubScreen(varOperation)
         }),
         $('#btn-multiply').click(function () {
             varNumber = getScreen()
-            varOperation = setSubScreen('*')
+            varOperation = '*'
+            setSubScreen(varOperation)
         }),
         $('#btn-divide').click(function () {
             varNumber = getScreen()
-            varOperation = setSubScreen('/')
+            varOperation = '/'
+            setSubScreen(varOperation)
         }),
         $('#btn-result').click(function () {
-            callResult = result(varNumber, varOperation, getScreen())
+            if (getScreen() == '0' || varResultCall == true) {
+                alert('Ops! Ocorreu um erro de sintaxe! ¯\\_(ツ)_/¯')
+            } else {
+                setSubScreen(getScreen())
+                varResult = result(varNumber, varOperation)
+                clearScreen()
+                setScreen(varResult)
+                varResultCall = true
+            }
         })
 })
